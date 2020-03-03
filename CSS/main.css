@@ -1,0 +1,85 @@
+body {
+  display: grid; 
+  grid-template-columns: 1fr; 
+  grid-template-rows: 20% 70% 1fr; 
+  height: 100vh;
+  margin: 0; 
+  grid-template-areas: 
+  "header"
+  "main"
+  "ftr";
+}
+
+header {
+  grid-area: header; 
+  background-color:#046307;
+  border: 12px solid black;
+  color: #C60;
+  font-family: 'Press Start 2P';
+  font-size: 65px;
+  text-align: center; 
+}
+
+/* nav {
+  grid-area: nav; 
+  background-color:#046307; 
+} */
+
+main {
+  grid-area: main; 
+  background-color:#046307;
+}
+
+footer {
+  grid-area: ftr; 
+  background-color: black;
+}
+
+/* #questions{
+  border: 10px solid wheat;
+  height: 60%;
+  background-color: wheat;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 20px;
+} */
+
+#game{
+  text-align: center; 
+  margin-top: 20px;
+       
+}
+
+#images{
+  border: solid black;
+}
+
+#qbox{
+  border: 10px solid black; 
+  margin-right: 20px;
+  margin-left: 20px;
+  height: 50px;
+  background-color: white;
+  
+}
+.next {
+border: 3px solid black; 
+right: 150px; 
+}
+
+
+
+
+
+
+
+
+/* #timebar {
+  width: 100%; 
+  background-color: grey;
+}
+
+#timer {
+  width: 100%; 
+  background-color: #C60;
+} */

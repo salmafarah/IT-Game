@@ -1,161 +1,202 @@
 
-/*----- constants -----*/
+/*----- app's state (variables) -----*/
 
-const QUESTIONS = [
+var QUESTIONS = [
     {
         image: "https://imgur.com/qgczFSr.jpg", 
         q:  "What was Roy's catch pharse on the show?", 
         answers:[ "Make it so", "Have you tried turning it on and off again.", "You shall not pass", "Live long and prosper."], 
-        correct: 2, 
-    }, 
+        correct: 1,
+        guess: -1,
+    },
     {
         image: "https://imgur.com/PUozVHR.jpg", 
         q: "Why did Phillip ask Jen out to the musical?", 
         answers: ["She looks like a man.", "She loves musicals.", "He wanted to hangout with Moss and Roy.", "It was a work outing."], 
-        correct: 1, 
+        correct: 0,
+        guess: -1,
     },
     {
         image: "https://imgur.com/frXfz6X.jpg", 
         q: "What happened to Moss when he wanted to learn German cuisine?", 
-        answers: ["He wasn't a chef.", "His instructor was a cannibal", "He burned the building down and couldn't call 999.", "German food just wasn't for him"],
-        correct: 3, 
+        answers: ["He hates cooking.", "His instructor was a cannibal", "He burned the building down and couldn't call 999.", "German food just wasn't for him"],
+        correct: 1, 
+        guess: -1,
     },
     { 
         image: "https://imgur.com/VyXvUmz.jpg", 
         q: "What did Roy's date think was on his forehead?", 
         answers: ["Chocolate", "Poop", "He's self-respect", "Computer Gunk"], 
-        correct: 4, 
+        correct: 1, 
+        guess: -1,
     },
     { 
         image: "https://imgur.com/BvMKE5y.jpg", 
         q: "What was the word that won Moss the Countdown teapot.", 
         answers: ["Promiscuous", "Mandem", "Tnetennba", "Vista"], 
-        correct: 3, 
+        correct: 2, 
+        guess: -1,
     },
     {
         image: "https://imgur.com/cS6gFg2.jpg", 
         q: "What a bunch of  ", 
         answers: ["Cows", "Arseholed", "Nimrods", "Bastards"], 
-        correct: 4, 
+        correct: 3, 
+        guess: -1,
     }, 
     {
         image: "https://imgur.com/eivqY5R.jpg", 
         q: "What happened to Roy's girlfriends parents at the Sea Parks?", 
         answers: ["They were murdered.", "They died in a fire.", "They got married.", "They've been stuck there for 30 years."], 
-        correct: 2, 
+        correct: 1, 
+        guess: -1,
     }, 
     {
         image: "https://imgur.com/b5ruE4y.jpg", 
         q: "What was Jen's boyfriends name?", 
         answers: ["Peter File", "File Peter", "Pedo File", "Mister Love"], 
-        correct: 1, 
+        correct: 0, 
+        guess: -1,
     }, 
     {
         image: "https://imgur.com/y77aH93.jpg", 
         q: "What is the new emergency number changed too?", 
         answers: ["0018-999-881-999-119-725-3", "999", "Dear Sir stroke Madam", "0118-999-881-999-119-725-3"], 
-        correct: 4, 
+        correct: 3, 
+        guess: -1,
     },     
     {
         image: "https://imgur.com/WU41tqa.jpg", 
         q: "Why was Richmond demoted ?", 
         answers: ["He was bad at his job.", "He become goth.", "He was found laundering money.", "He was put into witness protection."], 
-        correct: 2, 
+        correct: 1, 
+        guess: -1,
     }, 
     {
         image: "https://imgur.com/hODJxS7.jpg", 
         q: "Where did Moss and Roy take the sex workers?", 
         answers: ["To Amsterdam", "To a carnival", "To a cruise ship", "To the elders of the internet."], 
-        correct: 2, 
+        correct: 1, 
+        guess: -1,
     }, 
 ]
 
-
-/*----- app's state (variables) -----*/
-
 let currQuestion;
+let wrongAnswers = 0;
+let numCorrect = [];
+
 
 /*----- cached element references -----*/
 
-let imageEl= document.getElementById("images"); 
-let qboxEl= document.getElementById("qbox"); 
-let buttons= document.querySelectorAll(".button");
-let buttonEl= document.getElementById("buttons");
-let prevBtnEl= document.getElementById("prev-btn");
-let nextBtnEl= document.getElementById("next-btn");
-let startEl= document.getElementById("start-btn");  
-let modalEl= document.getElementById("modal"); 
+let imageEl = document.getElementById("images"); 
+let qboxEl = document.getElementById("qbox"); 
+let buttons = document.querySelectorAll(".button");
+let buttonEl = document.getElementById("buttons");
+let prevBtnEl = document.getElementById("prev-btn");
+let nextBtnEl = document.getElementById("next-btn");
+let startEl = document.getElementById("start-btn");  
+let modalEl = document.getElementById("modal"); 
+let tryAgainEl = document.getElementById("tryagain"); 
+let tryAgainBtn = document.getElementById("tryagain-btn");
+let playAgainEl = document.getElementById("congrats"); 
+let playAgainBtn = document.getElementById("playagain-btn")
 
 
-
-  
 /*----- event listeners -----*/
 nextBtnEl.addEventListener('click', nextQuestion)
 prevBtnEl.addEventListener('click', prevQuestion)
 buttonEl.addEventListener('click',correctAnswer)
-// startEl.addEventListener('click', start) 
+startEl.addEventListener('click', start) 
+tryAgainBtn.addEventListener('click', tryAgain)
+playAgainBtn.addEventListener('click', tryAgain)
+
 
 
 /*----- functions -----*/
 
 init() 
 
-// function off(event){
-//     if(event.target.value == startEl){
-//         modalEl.style.display= "none"; 
-//     }
-// }
 
+function tryAgain(){
+wrongAnswers = 0; 
+tryAgainEl.style.display = 'none';
+reset(); 
+QUESTIONS = shuffle(); 
+currQuestion = 0;
+render(); 
+}
 
-/ window.onload(); 
-window.onload = function start(){
-   
+function reset(){
+    buttons.forEach(function(button){
+        button.classList.remove("fail"); 
+        button.classList.remove("success"); 
+        button.disabled = false; 
+    }); 
+    QUESTIONS.forEach(function(question){
+        question.guess = -1; 
+    }); 
 }
 
 
+function shuffle(){
+var currentIndex = QUESTIONS.length; 
+var tempValue = null;
+var randomIndex = null; 
+while (0 !== currentIndex){
+    randomIndex = Math.floor(Math.random() * currentIndex); 
+    currentIndex -= 1; 
+    tempValue = QUESTIONS[currentIndex];
+    QUESTIONS[currentIndex] = QUESTIONS[randomIndex]; 
+    QUESTIONS[randomIndex] = tempValue; 
+
+}
+return QUESTIONS
+}
 
 
-
+function start() {
+   modalEl.style.display = 'none'
+}
 
 
 function correctAnswer(event){
-   if(event.target.id == "buttons"){
-       return; 
-   }
-    if(event.target.value == QUESTIONS[currQuestion].correct){
-        event.target.classList.add("success")
-        buttons.forEach(function(cb){
-            cb.disabled = true;
-         }); 
-         event.target.disabled = false
-    } else{
-        event.target.classList.add("fail")
-        }; 
+    if (event.target.id == "buttons"){
+        return; 
+    }
 
+    if (QUESTIONS[currQuestion].guess !== -1) {
+        return;
+    }
+
+    let guessId = parseInt(event.target.id.replace('button', ''))
+    if (isNaN(guessId)) return;
+    console.log(event.target.value)
+
+
+    if (event.target.value == QUESTIONS[currQuestion].correct){
+        console.log('working!')
+      numCorrect.push(QUESTIONS[currQuestion].correct)
+    } 
+
+
+    QUESTIONS[currQuestion].guess = guessId
+    if (wrongAnswers < 3) {
+        wrongAnswers = QUESTIONS.reduce((wrongCount, question) => {
+            if (question.guess !== -1 && question.guess !== question.correct) {
+                wrongCount += 1
+            }
+            return wrongCount
+        }, 0)
+    } else {
+        wrongAnswers = 0;
+    }
+
+    render() 
 }
-
-
-
-    //     event.target.style.backgroundColor = 'green'; 
-    //     buttonEl.removeEventListener('click',correctAnswer
-    // } 
-    // buttons.forEach(function(cb){
-    //     cb.classList.add("success", "fail"); 
-    // }); 
    
-
-
-
-function nextQuestion() {
+function nextQuestion(evt) {
     currQuestion++
     render(); 
-    
-        buttons.forEach(function(cb) {
-            cb.classList.remove("success")
-            cb.classList.remove("fail")
-            cb.disabled = false;
-        }); 
-         
 }
 
 
@@ -166,33 +207,77 @@ function prevQuestion() {
 
 
 function init() {
-  
     currQuestion = 0; 
     render(); 
-    start(); 
 }
 
 function render() {
     imageEl.src = QUESTIONS[currQuestion].image;
     qbox.textContent = QUESTIONS[currQuestion].q;
-    for (let i = 0; i < buttons.length; i++){
-        buttons[i].textContent= QUESTIONS[currQuestion].answers[i]; 
+    for (let i = 0; i < buttons.length; i++) {
+        let btnEl = buttons[i]
+        let guess = QUESTIONS[currQuestion].guess
+        let correct = QUESTIONS[currQuestion].correct
+        btnEl.textContent= QUESTIONS[currQuestion].answers[i];
+
+        // if this question has been guessed
+        if (guess !== -1) {
+            // if the button we are on (in the loop) is the guess we made
+            if (guess === i) {
+                // if guess is correct answer
+                if (correct === guess) {
+                    // make sure its the success class on the button
+                    btnEl.classList.remove("fail")
+                    btnEl.classList.add("success")
+                } else {
+                    // if not correct answer, make sure it is fail class on button
+                    btnEl.classList.remove("success")
+                    btnEl.classList.add("fail")
+                };
+                // since this button was the guess, make sure it isn't disabled
+                btnEl.disabled = false; 
+            } else {
+                // if this is a non guess button for a answered question
+                // we remove success and fail and disable
+                btnEl.classList.remove("success")
+                btnEl.classList.remove("fail")
+                btnEl.disabled = true; 
+            }
+        } else {
+            // if the question has not been answered, button remain white and clickable
+            btnEl.classList.remove("success")
+            btnEl.classList.remove("fail")
+            btnEl.disabled = false; 
+        }
     }
+
+    // renders the previous or next buttons
     prevBtnEl.style.display = currQuestion === 0 ? 'none' : 'inline'
     nextBtnEl.style.display = currQuestion === QUESTIONS.length - 1 ? 'none' : 'inline'
+
+    // congrats 
+    // show the congrats answer modal
+    if (numCorrect.length == 9 && wrongAnswers < 2){
+        playAgainEl.style.display = 'none'; 
+    } else if(numCorrect.length == 9 && wrongAnswers == 2){
+        playAgainEl.style.display = 'block'
+    } else if(numCorrect.length == 11){
+        playAgainEl.style.display = 'block'
+    } else {
+        playAgainEl.style.display = 'none'; 
+    }; 
+
+  // if wrong answers = 3
+    // show the wrong answer modal
+    if (wrongAnswers < 3){
+        tryAgainEl.style.display ='none';
+    } else if (wrongAnswers == 3) {
+        tryAgainEl.style.display ='block'; 
+    }; 
 
 }
 
 
-// function currentQuestion(){
-//     qbox.textContent = QUESTIONS[nextQuestion].q;
-//     images.src = QUESTIONS[nextQuestion].image; 
-//     for(let i = 0; i < buttons.length; i++){
-//     buttons[i].textContent = QUESTIONS[nextQuestion].answers[i]
-//     }
-//     nextQuestion++ 
-// }
-// currentQuestion();  
 
 
 
@@ -204,72 +289,3 @@ function render() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function sorting(){
-//       return Math.floor(Math.random() * Math.floor(QUESTIONS.length)); 
-     
-// }
-
-
-// console.log(QUESTIONS[sorting()]); 
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// let image1 = document.createElement("img"); 
-// image1.src = "https://i.imgur.com/MlKNB0e.jpg";
-
-// let image2 = document.createElement("img").src; 
-// image2.src = "https://i.imgur.com/AM9buKu.jpg"; 
-
-// let slides = document.getElementById("slides");
-// slides.src = 'https://i.imgur.com/MlKNB0e.jpg';
-
-// let i = 0 
-// let images = []; 
-
-// images[0]= image1; 
-// //images[1]= image2; 
-
-// //images in synchronous
-
-// function uploadImage(){
-//     if (i < images.length - 1){
-//       return i++ }}
-//     } else {
-//         i = 0; 
-//     }
-// }
-
-// setTimeout(uploadImage(), 3000); 
-
-// uploadImage();   

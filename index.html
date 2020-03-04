@@ -18,10 +18,10 @@
             <img id="images" width="350px" height="250px"> 
             <p id="qbox"></p> 
             <div id="buttons"> 
+                <button id="button0" class="button" class="success" class="fail" value="0" type="button"></button>
                 <button id="button1" class="button" class="success" class="fail" value="1" type="button"></button>
                 <button id="button2" class="button" class="success" class="fail" value="2" type="button"></button>
                 <button id="button3" class="button" class="success" class="fail" value="3" type="button"></button>
-                <button id="button4" class="button" class="success" class="fail" value="4" type="button"></button>
             </div>
         </div>
     
@@ -30,17 +30,32 @@
             <button id="next-btn" class="next">Next &raquo;</button>
         </div>
 
-        <div id="modal"> 
-            <div id="modaltext"></div>
-            <img id="imgModal"src="https://imgur.com/qgczFSr.jpg"> 
-            <button id="start-btn" type="button"></button>
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <p>Whatever your text is...</p>
+                <img id="imgModal"src="https://imgur.com/qgczFSr.jpg">
+                <button id="start-btn" type="button">Start Game</button>
+            </div>
+        </div>
+          
+    
+        <div id="tryagain">
+            <div class="tryagain-content">
+                <p>ERROR</p>
+                <button id="tryagain-btn" type="button">Try Again</button>
+            </div>
         </div>
 
+        <div id="congrats">
+            <div class="congrats-content">
+                <p>Congratulations</p>
+                <button id="playagain-btn" type="button">Play Again</button>
+            </div>
+        </div>
 
+    </main> 
 
-    </main>  /
-
-    <footer></footer>
+    <!-- <footer></footer> -->
 
 </body>
 </html>

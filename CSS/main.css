@@ -74,49 +74,41 @@ right: 150px;
   background-color:red;
 }
 
-
-#overlay {
-  position: fixed;
-  display: none; 
+#modal{
   width: 100%; 
   height: 100%; 
-  top: 0;
-  left: 0; 
-  right: 0; 
-  bottom: 0; 
-  background-color: rgba (0,0,0,0.5);
-  z-index: 2; 
-  cursor: pointer; 
+  background-color: rgba(0, 0,0, 0.7);
+  position: absolute;
+  top:0; 
+  display: grid; 
+  justify-content: center;
+  align-items: center; 
+  z-index: 1;
 }
 
-#modal {
-  display: none; 
-  position: fixed; 
-  z-index: 1; 
-  left: 0;
-  top: 0;
-  width: 100%; 
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgb(0,0,0); 
-  background-color: rgba(0,0,0,0.4); 
-}
-
-#modal-text{
-  background-color: #fefefe;
-  margin: 15% auto; 
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; 
+#modaltext{
+  width: 500px; 
+  height: 300px; 
+  background-color: rgba(0, 0,0, 0.7); 
+  border-radius: 4px;
+  text-align: center;
+  padding: 20px; 
 }
 
 
 #start-btn{
-  border: black;
+  border: black; 
+  width: 50%; 
+  display: block; 
+  margin: 0 auto; 
+  cursor: pointer; 
+
 }
 
-
-
+#imgModal{
+  width: 100px;
+  height: 100px;
+}
 
 
 

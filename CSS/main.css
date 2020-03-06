@@ -1,72 +1,120 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-  display: grid; 
-  grid-template-columns: 1fr; 
-  grid-template-rows: 20% 70% 1fr; 
-  height: 100vh;
-  margin: 0; 
-  grid-template-areas: 
-  "header"
-  "main"
-  "ftr";
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  background-image: url(https://imgur.com/gl3OAA6.jpg); 
 }
 
 header {
-  grid-area: header; 
-  background-color:#046307;
-  border: 12px solid black;
-  color: #C60;
+  border: 20px solid black;
+  width: 100%;
+}
+
+h1 {
+  color: white; 
   font-family: 'Press Start 2P';
-  font-size: 65px;
   text-align: center; 
+  font-size: 60px;
+  padding-bottom: 0;
 }
 
-/* nav {
-  grid-area: nav; 
-  background-color:#046307; 
-} */
-
-main {
-  grid-area: main; 
-  background-color:#046307;
-}
-
-footer {
-  grid-area: ftr; 
-  background-color: black;
-
-}
-
-/* #questions{
-  border: 10px solid wheat;
-  height: 60%;
-  background-color: wheat;
-  margin-left: 20%;
-  margin-right: 20%;
-  margin-top: 20px;
-} */
 
 #game{
   text-align: center; 
-  margin-top: 20px;
-       
 }
 
 #images{
-  border: solid black;
+  border: 10px solid black;
+  margin: 20px;
+  margin-bottom: 10px;
+  width: 700px;
+  height: 350px;
+  margin-top: 10px;
+  border-radius: 10px;
 }
 
 #qbox{
-  border: 10px solid black; 
-  margin-right: 20px;
-  margin-left: 20px;
-  height: 50px;
+  margin: auto;
+  border: 5px solid black; 
   background-color: white;
-  
+  margin-top: 0;
+  width: 50%;
+  height: 60%; 
+  font-weight: bold;
+  font-size: 40px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
 }
+
+#buttons {
+  padding: 20px; 
+
+}
+
+.button {
+    border: 3px solid black;
+    border-radius: 10px; 
+    right: 150px; 
+    background-color: #4066E0; 
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+    margin: 4px 2px;
+    cursor: pointer;
+    vertical-align: middle;
+  }
+
+
+.button:hover {  
+    background-color: #B9BFFF;
+    color: white;
+  }
+
+#next-prev{
+    padding: 35px; 
+  }
+
 .next {
-border: 3px solid black; 
-right: 150px; 
+  border: 3px solid black;
+  border-radius: 10px; 
+  right: 150px; 
+  background-color:#4066E0; 
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  margin: 4px 2px;
+  cursor: pointer;
+  vertical-align: middle;
+  float: right;
 }
+
+.previous {
+  border: 3px solid black;
+  border-radius: 10px; 
+  right: 150px; 
+  background-color: #4066E0; 
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  margin: 4px 2px;
+  cursor: pointer;
+  vertical-align: middle;
+  float: left;
+  }
 
 .success {
   background-color: green;
@@ -76,6 +124,8 @@ right: 150px;
 }
 
 .modal {
+  background-image: url('https://imgur.com/QzRLflN.jpg');
+  background-size: 20em;
   display: flex; 
   justify-content: center;
   align-items: center;
@@ -86,80 +136,106 @@ right: 150px;
   width: 100%; 
   height: 100%; 
   overflow: auto; 
-  background-color: rgb(0,0,0); 
-  background-color: rgba(0,0,0,0.7); 
 }
 
 .modal-content {
-  background-color: #fefefe;
+  background-color: black;
+  color: white; 
+  text-align: center;
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%; 
+  border: 10px solid black;
+  width: 50%;
+  font-family: 'Press Start 2P';
+  font-size: 35px;
 }
 
-#imgModal { 
-  width: 100px;
-  height: 100px;
+p {
+  margin: 30px;
+}
+
+span{
+  color: #FF652F;
+}
+
+#start-btn{
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #4066E0;
 }
 
 #tryagain{
   display: flex; 
-  justify-content: center;
-  align-items: center;
-  position: fixed; 
-  left: 0;
-  top: 0;
+  margin: auto;
+  margin-top: 10%;
   width: 100%; 
-  height: 100%; 
-  overflow: auto; 
+  height: 100%;
+  position: fixed; 
+   top: 0; 
 }
 
-.tryagain-content {
-  background-image: url('https://imgur.com/jmOBNss.jpg'); 
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; 
-  height: 30%; 
+.tryagain-content { 
+  background-image: url('https://imgur.com/R4SwUxu.jpg');
+  background-size: 100%;
+  width: 50%; 
+  margin: auto;
+  height: 45%; 
+  animation-name: flash; 
+  border-radius: 50px;
+  font-size: 70px;
+  font-weight: bold;
+  color: red; 
+  text-align: center;
   }
-  
-  #congrats{
-  border: solid black;
+
+#tryagain-btn {
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  font-weight: bold; 
+}
+
+
+#congrats {
+  background-image: url('https://imgur.com/9Bw6naJ.jpg');
+  background-size: 20em;
   display: flex; 
   justify-content: center;
   align-items: center;
   position: fixed; 
+  z-index: 1; 
   left: 0;
   top: 0;
   width: 100%; 
   height: 100%; 
   overflow: auto; 
-  }
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* #timebar {
-  width: 100%; 
-  background-color: grey;
 }
 
-#timer {
-  width: 100%; 
-  background-color: #C60;
-} */
+.congrats-content { 
+  background-color: black;
+  color: white; 
+  text-align: center;
+  padding: 20px;
+  border: 10px solid black;
+  width: 60%;
+  font-family: 'Press Start 2P';
+  font-size: 35px;
+  margin: auto;
+  margin-top: 150px;
+}
+
+
+#playagain-btn {
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  font-weight: bold; 
+}
+
+
+

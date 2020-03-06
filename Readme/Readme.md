@@ -15,8 +15,8 @@ JS
 
 ## **Getting Started:**
 
-
+https://salmafarah.github.io/IT-Game/
 
 
 ## **Next Steps:** 
-In the future I plan to make the site responsive, add a timed progress bar that would move the player to the next question, and display the number of answers the player got right. 
+In the future I plan to make the site responsive, add a timed progress bar that would move the player to the next question, and display the number of questions the player got right. 
